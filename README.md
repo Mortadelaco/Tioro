@@ -8,6 +8,11 @@
 ![Offline First](https://img.shields.io/badge/100%25%20Local-Offline%20First-E5C07B?style=for-the-badge)
 
 **Tioro** es una aplicación nativa de Android diseñada para organizar tu día a día y medir tu constancia real **sin caer en la productividad tóxica**. Acepta el ocio, exige equilibrio mediante actividades de esfuerzo, penaliza la inactividad real y funciona **100% en local** para garantizar privacidad total y velocidad instantánea.
+## 📱 Capturas de Pantalla
+
+| Inicio & Bloque de Trabajo | Estadísticas Semanales | Calendario de Racha | Backup (Máquina del Tiempo) |
+| :---: | :---: | :---: | :---: |
+| <img src="main_screen.jpeg" width="200"/> | <img src="monthly_stats.jpeg" width="200"/> | <img src="streak.jpeg" width="200"/> | <img src="weekly_stats.jpeg" width="200"/> |
 
 ---
 
