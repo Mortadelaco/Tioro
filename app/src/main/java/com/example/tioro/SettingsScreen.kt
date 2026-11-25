@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,6 +15,7 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.FileDownload
 import androidx.compose.material.icons.filled.FileUpload
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material3.*
@@ -24,6 +26,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,8 +43,15 @@ fun SettingsScreen(
     viewModel: InquiViewModel? = null
 ) {
     val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
     val coroutineScope = rememberCoroutineScope()
     var showRestoreDialog by remember { mutableStateOf(false) }
+
+    val toastExportSuccess = stringResource(R.string.toast_export_success)
+    val toastExportError = stringResource(R.string.toast_export_error)
+    val toastImportSuccess = stringResource(R.string.toast_import_success)
+    val toastImportInvalid = stringResource(R.string.toast_import_invalid)
+    val toastImportError = stringResource(R.string.toast_import_error)
 
     // Launcher para Exportar (.json)
     val exportLauncher = rememberLauncherForActivityResult(
@@ -53,10 +64,10 @@ fun SettingsScreen(
                     context.contentResolver.openOutputStream(uri)?.use { outputStream ->
                         outputStream.write(jsonString.toByteArray())
                     }
-                    Toast.makeText(context, "Copia de seguridad exportada con éxito", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, toastExportSuccess, Toast.LENGTH_LONG).show()
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    Toast.makeText(context, "Error al exportar la copia", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, toastExportError, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -75,14 +86,14 @@ fun SettingsScreen(
                     if (jsonString != null) {
                         val success = viewModel.importBackupJson(context, jsonString)
                         if (success) {
-                            Toast.makeText(context, "Copia restaurada correctamente", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, toastImportSuccess, Toast.LENGTH_LONG).show()
                         } else {
-                            Toast.makeText(context, "Archivo de copia no válido", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, toastImportInvalid, Toast.LENGTH_LONG).show()
                         }
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    Toast.makeText(context, "Error al restaurar la copia", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, toastImportError, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -94,7 +105,7 @@ fun SettingsScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Configuración",
+                        text = stringResource(R.string.settings_screen_title),
                         color = Color.White,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
@@ -117,9 +128,10 @@ fun SettingsScreen(
         ) {
             
             SettingsGroup(
-                title = "PREFERENCIAS",
+                title = stringResource(R.string.settings_group_preferences),
                 items = listOf(
-                    SettingsItemData(Icons.Default.Notifications, "Notificaciones", "notifications_screen")
+                    SettingsItemData(Icons.Default.Notifications, stringResource(R.string.settings_item_notifications), "notifications_screen"),
+                    SettingsItemData(Icons.Default.Lightbulb, stringResource(R.string.settings_replay_tutorial), "tutorial")
                 ),
                 onNavigate = { route ->
                     if (route.isNotEmpty()) {
@@ -129,9 +141,9 @@ fun SettingsScreen(
             )
 
             SettingsGroup(
-                title = "MANTENIMIENTO",
+                title = stringResource(R.string.settings_group_maintenance),
                 items = listOf(
-                    SettingsItemData(Icons.Default.Storage, "Backup (Máquina del Tiempo)", "backup_screen")
+                    SettingsItemData(Icons.Default.Storage, stringResource(R.string.settings_item_backup), "backup_screen")
                 ),
                 onNavigate = { route ->
                     if (route.isNotEmpty()) {
@@ -140,10 +152,10 @@ fun SettingsScreen(
                 }
             )
 
-            // FASE 1: Datos y Copia de Seguridad
+            // Datos y Copia de Seguridad
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Text(
-                    text = "DATOS Y COPIA DE SEGURIDAD",
+                    text = stringResource(R.string.settings_group_data),
                     color = InquiTextMuted,
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
@@ -157,7 +169,7 @@ fun SettingsScreen(
                 ) {
                     Column {
                         SettingsItemRow(
-                            item = SettingsItemData(Icons.Default.FileUpload, "Exportar copia local (.json)", ""),
+                            item = SettingsItemData(Icons.Default.FileUpload, stringResource(R.string.settings_export_json), ""),
                             onClick = {
                                 val defaultFileName = "tioro_backup_${LocalDate.now()}.json"
                                 exportLauncher.launch(defaultFileName)
@@ -165,7 +177,7 @@ fun SettingsScreen(
                         )
                         HorizontalDivider(color = Color(0xFF2A2A2A), thickness = 1.dp)
                         SettingsItemRow(
-                            item = SettingsItemData(Icons.Default.FileDownload, "Restaurar copia (.json)", ""),
+                            item = SettingsItemData(Icons.Default.FileDownload, stringResource(R.string.settings_import_json), ""),
                             onClick = {
                                 showRestoreDialog = true
                             }
@@ -174,12 +186,17 @@ fun SettingsScreen(
                 }
             }
 
+            // Sistema (Acerca de Tioro -> GitHub)
             SettingsGroup(
-                title = "SISTEMA",
+                title = stringResource(R.string.settings_group_system),
                 items = listOf(
-                    SettingsItemData(Icons.Default.Info, "Acerca de Inqui", "")
+                    SettingsItemData(Icons.Default.Info, stringResource(R.string.settings_about_app), "github")
                 ),
-                onNavigate = {}
+                onNavigate = { route ->
+                    if (route == "github") {
+                        uriHandler.openUri("https://github.com/Mortadelaco/Tioro")
+                    }
+                }
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -190,10 +207,10 @@ fun SettingsScreen(
         AlertDialog(
             onDismissRequest = { showRestoreDialog = false },
             containerColor = InquiSurface,
-            title = { Text("Restaurar Copia de Seguridad", color = Color.White) },
+            title = { Text(stringResource(R.string.restore_dialog_title), color = Color.White) },
             text = {
                 Text(
-                    "Esto sustituirá tus datos actuales por los de la copia importada. ¿Deseas continuar?",
+                    stringResource(R.string.restore_dialog_text),
                     color = InquiTextMuted,
                     fontSize = 14.sp
                 )
@@ -203,12 +220,12 @@ fun SettingsScreen(
                     showRestoreDialog = false
                     importLauncher.launch(arrayOf("application/json"))
                 }) {
-                    Text("Restaurar", color = InquiGold, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.settings_import_json), color = InquiGold, fontWeight = FontWeight.Bold)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showRestoreDialog = false }) {
-                    Text("Cancelar", color = InquiTextMuted)
+                    Text(stringResource(R.string.cancel), color = InquiTextMuted)
                 }
             }
         )
@@ -286,7 +303,7 @@ fun SettingsItemRow(item: SettingsItemData, onClick: () -> Unit) {
         }
         Icon(
             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-            contentDescription = "Ir",
+            contentDescription = stringResource(R.string.continue_text),
             tint = InquiTextMuted,
             modifier = Modifier.size(20.dp)
         )

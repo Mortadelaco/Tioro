@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,6 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,7 +45,7 @@ fun NewProjectScreen(
             TopAppBar(
                 title = { 
                     Text(
-                        text = "Bloque de Trabajo",
+                        text = stringResource(R.string.work_block_screen_title),
                         color = Color.White,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold
@@ -52,7 +55,7 @@ fun NewProjectScreen(
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Atrás",
+                            contentDescription = stringResource(R.string.back),
                             tint = Color.White
                         )
                     }
@@ -79,7 +82,7 @@ fun NewProjectScreen(
                         border = androidx.compose.foundation.BorderStroke(1.dp, InquiGold)
                     ) {
                         Text(
-                            text = "Bloque Semanal Completado al 100%. No puedes realizar modificaciones hasta el próximo lunes.",
+                            text = stringResource(R.string.work_block_locked_banner),
                             color = InquiGold,
                             modifier = Modifier.padding(16.dp),
                             fontSize = 14.sp
@@ -90,7 +93,7 @@ fun NewProjectScreen(
                 // Campo Nombre del Bloque
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
-                        text = "TÍTULO DEL BLOQUE",
+                        text = stringResource(R.string.label_block_title),
                         color = InquiTextMuted,
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
@@ -114,14 +117,14 @@ fun NewProjectScreen(
                             disabledBorderColor = Color.Transparent
                         ),
                         singleLine = true,
-                        placeholder = { Text("Ej: Desarrollo MVP", color = InquiTextMuted) }
+                        placeholder = { Text(stringResource(R.string.placeholder_block_title), color = InquiTextMuted) }
                     )
                 }
 
                 // Lista de objetivos
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.weight(1f)) {
                     Text(
-                        text = "OBJETIVOS",
+                        text = stringResource(R.string.label_objectives),
                         color = InquiTextMuted,
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
@@ -174,7 +177,7 @@ fun NewProjectScreen(
                                 }
                                 if (!isLocked && !obj.isCompleted) {
                                     IconButton(onClick = { viewModel.deleteWorkBlockObjective(obj) }) {
-                                        Icon(Icons.Default.Delete, contentDescription = "Eliminar", tint = InquiTextMuted)
+                                        Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.delete), tint = InquiTextMuted)
                                     }
                                 }
                             }
@@ -203,7 +206,7 @@ fun NewProjectScreen(
                                 unfocusedTextColor = Color.White
                             ),
                             singleLine = true,
-                            placeholder = { Text("Nuevo objetivo...", color = InquiTextMuted) }
+                            placeholder = { Text(stringResource(R.string.placeholder_new_objective), color = InquiTextMuted) }
                         )
                         IconButton(
                             onClick = {
@@ -215,7 +218,7 @@ fun NewProjectScreen(
                             modifier = Modifier
                                 .background(InquiGold, RoundedCornerShape(12.dp))
                         ) {
-                            Icon(Icons.Default.Add, contentDescription = "Añadir", tint = InquiDarkBackground)
+                            Icon(Icons.Default.Add, contentDescription = stringResource(R.string.confirm), tint = InquiDarkBackground)
                         }
                     }
                 }

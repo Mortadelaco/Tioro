@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,6 +16,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,7 +36,7 @@ fun FullDailyListScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Lista Diaria Completa",
+                        text = stringResource(R.string.daily_list_full_title),
                         color = Color.White,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold
@@ -43,7 +46,7 @@ fun FullDailyListScreen(
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Atrás",
+                            contentDescription = stringResource(R.string.back),
                             tint = Color.White
                         )
                     }
@@ -61,7 +64,7 @@ fun FullDailyListScreen(
         ) {
             if (logs.isEmpty()) {
                 Text(
-                    text = "Aún no hay actividades registradas hoy.",
+                    text = stringResource(R.string.daily_list_no_logs_today),
                     color = InquiTextMuted,
                     fontSize = 14.sp,
                     modifier = Modifier.padding(24.dp)
@@ -72,7 +75,7 @@ fun FullDailyListScreen(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     item {
-                        SectionTitle(title = "ACTIVIDADES")
+                        SectionTitle(title = stringResource(R.string.section_activities))
                     }
                     items(logs, key = { "log_${it.id}" }) { log ->
                         ActivityLogItem(
@@ -92,7 +95,7 @@ fun FullDailyListScreen(
             AlertDialog(
                 onDismissRequest = { logToEdit = null },
                 containerColor = InquiSurface,
-                title = { Text("Editar Actividad", color = Color.White) },
+                title = { Text(stringResource(R.string.edit_activity_title), color = Color.White) },
                 text = {
                     OutlinedTextField(
                         value = newName,
@@ -109,10 +112,10 @@ fun FullDailyListScreen(
                     TextButton(onClick = {
                         if (newName.isNotBlank()) viewModel.updateLogName(log.id, newName)
                         logToEdit = null
-                    }) { Text("Guardar", color = InquiGold) }
+                    }) { Text(stringResource(R.string.save), color = InquiGold) }
                 },
                 dismissButton = {
-                    TextButton(onClick = { logToEdit = null }) { Text("Cancelar", color = InquiTextMuted) }
+                    TextButton(onClick = { logToEdit = null }) { Text(stringResource(R.string.cancel), color = InquiTextMuted) }
                 }
             )
         }

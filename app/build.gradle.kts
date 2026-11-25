@@ -5,13 +5,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.tioro"
+    namespace = "io.github.mortadelaco.tioro"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.example.tioro"
+        applicationId = "io.github.mortadelaco.tioro"
         minSdk = 26
         targetSdk = 37
         versionCode = 1

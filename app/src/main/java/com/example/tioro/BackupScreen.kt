@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -23,6 +24,8 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,7 +56,7 @@ fun BackupScreen(
             TopAppBar(
                 title = { 
                     Text(
-                        text = "Máquina del Tiempo",
+                        text = stringResource(R.string.backup_screen_title),
                         color = Color.White,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold
@@ -63,7 +66,7 @@ fun BackupScreen(
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Atrás",
+                            contentDescription = stringResource(R.string.back),
                             tint = Color.White
                         )
                     }
@@ -79,7 +82,7 @@ fun BackupScreen(
                 containerColor = InquiGold,
                 contentColor = InquiDarkBackground
             ) {
-                Icon(Icons.Default.Add, contentDescription = "Añadir")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.confirm))
             }
         }
     ) { paddingValues ->
@@ -96,7 +99,7 @@ fun BackupScreen(
                 border = androidx.compose.foundation.BorderStroke(1.dp, InquiGold.copy(alpha = 0.5f))
             ) {
                 Text(
-                    text = "Usa el Backup como un salvavidas excepcional para días olvidados, no como una costumbre. La honestidad es la base de Tioro.",
+                    text = stringResource(R.string.backup_disclaimer),
                     color = InquiTextMuted,
                     fontSize = 12.sp,
                     modifier = Modifier.padding(16.dp),
@@ -111,7 +114,7 @@ fun BackupScreen(
             ) {
                 Column {
                     Text(
-                        text = "FECHA SELECCIONADA",
+                        text = stringResource(R.string.label_selected_date),
                         color = InquiTextMuted,
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold
@@ -136,7 +139,7 @@ fun BackupScreen(
                 
                 Column(horizontalAlignment = Alignment.End) {
                     Text(
-                        text = "NOTA DEL DÍA",
+                        text = stringResource(R.string.label_day_score),
                         color = InquiTextMuted,
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold
@@ -149,7 +152,7 @@ fun BackupScreen(
                         modifier = Modifier.padding(top = 4.dp)
                     )
                     Text(
-                        text = if (uiState.backupDayScore >= 50f) "Racha a salvo" else "Racha perdida",
+                        text = if (uiState.backupDayScore >= 50f) stringResource(R.string.streak_saved_status) else stringResource(R.string.streak_lost_status),
                         color = if (uiState.backupDayScore >= 50f) InquiGold else InquiTextMuted,
                         fontSize = 10.sp
                     )
@@ -157,7 +160,7 @@ fun BackupScreen(
             }
 
             Text(
-                text = "ACTIVIDADES",
+                text = stringResource(R.string.section_activities),
                 color = InquiTextMuted,
                 fontSize = 10.sp,
                 fontWeight = FontWeight.Bold,
@@ -172,7 +175,7 @@ fun BackupScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "No hay registros en esta fecha.",
+                        text = stringResource(R.string.backup_no_records),
                         color = InquiTextMuted,
                         fontSize = 14.sp
                     )
@@ -216,12 +219,12 @@ fun BackupScreen(
                     }
                     showDatePicker = false
                 }) {
-                    Text("Aceptar", color = InquiGold)
+                    Text(stringResource(R.string.confirm), color = InquiGold)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDatePicker = false }) {
-                    Text("Cancelar", color = InquiTextMuted)
+                    Text(stringResource(R.string.cancel), color = InquiTextMuted)
                 }
             },
             colors = DatePickerDefaults.colors(
@@ -266,7 +269,7 @@ fun BackupScreen(
         AlertDialog(
             onDismissRequest = { showAddDialog = false },
             containerColor = InquiSurface,
-            title = { Text("Añadir Actividad Pasada", color = Color.White) },
+            title = { Text(stringResource(R.string.add_past_activity_title), color = Color.White) },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     OutlinedTextField(
@@ -278,7 +281,7 @@ fun BackupScreen(
                             unfocusedTextColor = Color.White,
                             focusedBorderColor = InquiGold
                         ),
-                        placeholder = { Text("Nombre de la actividad", color = InquiTextMuted) }
+                        placeholder = { Text(stringResource(R.string.placeholder_activity_name), color = InquiTextMuted) }
                     )
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -289,7 +292,7 @@ fun BackupScreen(
                             onCheckedChange = { newActivityIsEffort = it },
                             colors = CheckboxDefaults.colors(checkedColor = InquiGold)
                         )
-                        Text("Es Actividad+ (Mayor esfuerzo)", color = Color.White, fontSize = 14.sp)
+                        Text(stringResource(R.string.checkbox_effort_description), color = Color.White, fontSize = 14.sp)
                     }
                 }
             },
@@ -301,10 +304,10 @@ fun BackupScreen(
                         newActivityIsEffort = false
                         showAddDialog = false
                     }
-                }) { Text("Guardar", color = InquiGold) }
+                }) { Text(stringResource(R.string.save), color = InquiGold) }
             },
             dismissButton = {
-                TextButton(onClick = { showAddDialog = false }) { Text("Cancelar", color = InquiTextMuted) }
+                TextButton(onClick = { showAddDialog = false }) { Text(stringResource(R.string.cancel), color = InquiTextMuted) }
             }
         )
     }

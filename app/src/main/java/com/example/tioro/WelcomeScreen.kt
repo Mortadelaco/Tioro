@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -59,7 +60,7 @@ fun WelcomeScreen(
 
             // Titulo y subtítulo
             Text(
-                text = "Bienvenido",
+                text = androidx.compose.ui.res.stringResource(R.string.welcome_title),
                 color = Color.White,
                 fontSize = 32.sp,
                 fontWeight = FontWeight.Bold
@@ -68,7 +69,7 @@ fun WelcomeScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Comencemos por conocernos un poco.\n¿Cómo te gustaría que nos dirijamos a ti?",
+                text = androidx.compose.ui.res.stringResource(R.string.welcome_subtitle),
                 color = InquiTextMuted,
                 fontSize = 14.sp,
                 textAlign = TextAlign.Center,
@@ -83,7 +84,7 @@ fun WelcomeScreen(
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(
-                    text = "TU NOMBRE",
+                    text = androidx.compose.ui.res.stringResource(R.string.welcome_subtitle).uppercase(),
                     color = InquiTextMuted,
                     fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
@@ -93,7 +94,7 @@ fun WelcomeScreen(
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    placeholder = { Text("Tu nombre", color = Color.Gray) },
+                    placeholder = { Text(androidx.compose.ui.res.stringResource(R.string.welcome_name_placeholder), color = Color.Gray) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
@@ -129,7 +130,7 @@ fun WelcomeScreen(
                 enabled = name.isNotBlank()
             ) {
                 Text(
-                    text = "Comenzar",
+                    text = androidx.compose.ui.res.stringResource(R.string.welcome_start_button),
                     color = InquiDarkBackground,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold

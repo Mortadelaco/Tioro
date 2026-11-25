@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -16,6 +17,7 @@ import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -78,7 +80,7 @@ fun MonthlyStatsContent(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Estadísticas Mensuales",
+                        text = stringResource(R.string.stats_monthly_title),
                         color = Color.White,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
@@ -96,7 +98,7 @@ fun MonthlyStatsContent(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Atrás",
+                            contentDescription = stringResource(R.string.back),
                             tint = Color.White,
                             modifier = Modifier.size(20.dp)
                         )
@@ -145,7 +147,7 @@ fun MonthlyChartSection(activityPoints: List<Float>) {
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
-                text = "RENDIMIENTO MENSUAL",
+                text = stringResource(R.string.chart_header_monthly),
                 color = InquiTextMuted,
                 fontSize = 11.sp,
                 fontWeight = FontWeight.Bold,
@@ -156,7 +158,7 @@ fun MonthlyChartSection(activityPoints: List<Float>) {
 
             // Leyenda
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                LegendItem("Actividades", InquiGold)
+                LegendItem(stringResource(R.string.legend_activities), InquiGold)
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -220,7 +222,12 @@ fun MonthlyChartSection(activityPoints: List<Float>) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                val weeks = listOf("Sem 1", "Sem 2", "Sem 3", "Sem 4")
+                val weeks = listOf(
+                    stringResource(R.string.medal_week_prefix, 1),
+                    stringResource(R.string.medal_week_prefix, 2),
+                    stringResource(R.string.medal_week_prefix, 3),
+                    stringResource(R.string.medal_week_prefix, 4)
+                )
                 weeks.forEach { week ->
                     Text(
                         text = week,
@@ -276,7 +283,7 @@ fun MonthlyRadialProgressSection(percentage: Int) {
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "Media total",
+                        text = stringResource(R.string.label_total_average),
                         color = InquiTextMuted,
                         fontSize = 10.sp
                     )
@@ -288,7 +295,7 @@ fun MonthlyRadialProgressSection(percentage: Int) {
             // Texto descriptivo a la derecha
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = "Objetivos del mes",
+                    text = stringResource(R.string.monthly_radial_title),
                     color = InquiGold,
                     fontSize = 22.sp,
                     fontFamily = FontFamily.Serif,
@@ -296,7 +303,7 @@ fun MonthlyRadialProgressSection(percentage: Int) {
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Buen rendimiento general. Has superado la mayoría de tus métricas previstas durante las últimas semanas.",
+                    text = stringResource(R.string.monthly_radial_sub),
                     color = InquiTextMuted,
                     fontSize = 12.sp,
                     lineHeight = 16.sp
@@ -311,17 +318,17 @@ fun MedalsSection(medals: List<Boolean>) {
     val safeMedals = if (medals.size >= 5) medals else List(5) { false }
 
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        SectionTitle(title = "MEDALLAS SEMANALES")
+        SectionTitle(title = stringResource(R.string.section_weekly_medals))
         
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            MedalItem(week = "Sem 1", earned = safeMedals[0])
-            MedalItem(week = "Sem 2", earned = safeMedals[1])
-            MedalItem(week = "Sem 3", earned = safeMedals[2])
-            MedalItem(week = "Sem 4", earned = safeMedals[3])
-            MedalItem(week = "Sem 5", earned = safeMedals[4])
+            MedalItem(week = stringResource(R.string.medal_week_prefix, 1), earned = safeMedals[0])
+            MedalItem(week = stringResource(R.string.medal_week_prefix, 2), earned = safeMedals[1])
+            MedalItem(week = stringResource(R.string.medal_week_prefix, 3), earned = safeMedals[2])
+            MedalItem(week = stringResource(R.string.medal_week_prefix, 4), earned = safeMedals[3])
+            MedalItem(week = stringResource(R.string.medal_week_prefix, 5), earned = safeMedals[4])
         }
     }
 }
@@ -342,7 +349,7 @@ fun MedalItem(week: String, earned: Boolean) {
             ) {
                 Icon(
                     imageVector = Icons.Default.EmojiEvents,
-                    contentDescription = "Medalla conseguida",
+                    contentDescription = null,
                     tint = InquiGold,
                     modifier = Modifier.size(24.dp)
                 )
@@ -356,7 +363,7 @@ fun MedalItem(week: String, earned: Boolean) {
             ) {
                 Icon(
                     imageVector = Icons.Default.Lock,
-                    contentDescription = "Medalla bloqueada",
+                    contentDescription = null,
                     tint = InquiDarkBackground,
                     modifier = Modifier.size(20.dp)
                 )
@@ -388,14 +395,14 @@ fun YearlyDataButton(onClick: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Consultar estadísticas anuales",
+                text = stringResource(R.string.btn_consult_annual),
                 color = Color.White,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium
             )
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = "Ir",
+                contentDescription = stringResource(R.string.continue_text),
                 tint = InquiGold,
                 modifier = Modifier.size(20.dp)
             )

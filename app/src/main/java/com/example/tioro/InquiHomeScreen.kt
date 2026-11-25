@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -18,6 +19,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -234,7 +236,7 @@ fun InquiHomeScreenContent(
         AlertDialog(
             onDismissRequest = { isEditingName = false },
             containerColor = InquiSurface,
-            title = { Text("Cambiar nombre", color = Color.White) },
+            title = { Text(stringResource(R.string.edit_name_title), color = Color.White) },
             text = {
                 OutlinedTextField(
                     value = newUserName,
@@ -253,10 +255,10 @@ fun InquiHomeScreenContent(
                         onSaveUserName(newUserName)
                         isEditingName = false 
                     }
-                }) { Text("Guardar", color = InquiGold) }
+                }) { Text(stringResource(R.string.save), color = InquiGold) }
             },
             dismissButton = {
-                TextButton(onClick = { isEditingName = false }) { Text("Cancelar", color = InquiTextMuted) }
+                TextButton(onClick = { isEditingName = false }) { Text(stringResource(R.string.cancel), color = InquiTextMuted) }
             }
         )
     }
@@ -267,7 +269,7 @@ fun InquiHomeScreenContent(
             containerColor = InquiSurface,
             title = {
                 Text(
-                    text = "Resumen de tu semana",
+                    text = stringResource(R.string.recap_dialog_title),
                     color = Color.White,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold
@@ -295,7 +297,7 @@ fun InquiHomeScreenContent(
                         )
                     ) {
                         Text(
-                            text = if (recap.lastWeekEarnedMedal) "🏆 ¡Medalla semanal conseguida!" else "Semana cerrada sin medalla",
+                            text = if (recap.lastWeekEarnedMedal) stringResource(R.string.recap_medal_earned) else stringResource(R.string.recap_medal_missed),
                             color = if (recap.lastWeekEarnedMedal) InquiGold else InquiTextMuted,
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Medium,
@@ -305,9 +307,9 @@ fun InquiHomeScreenContent(
 
                     Text(
                         text = if (recap.carriedOverObjectivesCount > 0) {
-                            "Se han arrastrado ${recap.carriedOverObjectivesCount} objetivos pendientes del Bloque de Trabajo a esta nueva semana."
+                            stringResource(R.string.recap_carried_over, recap.carriedOverObjectivesCount)
                         } else {
-                            "¡Completaste al 100% los objetivos de tu Bloque de Trabajo de la semana anterior!"
+                            stringResource(R.string.recap_block_100)
                         },
                         color = InquiTextMuted,
                         fontSize = 13.sp,
@@ -323,7 +325,7 @@ fun InquiHomeScreenContent(
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Empezar nueva semana", color = InquiDarkBackground, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.btn_start_new_week), color = InquiDarkBackground, fontWeight = FontWeight.Bold)
                 }
             }
         )
@@ -356,7 +358,7 @@ fun TopSection(score: Float, streak: Int, onStreakClick: () -> Unit) {
                         .background(InquiGold)
                 )
                 Text(
-                    text = "Nota hoy: ${String.format(Locale.getDefault(), "%.1f", score)}",
+                    text = stringResource(R.string.score_today, String.format(Locale.getDefault(), "%.1f", score)),
                     color = Color.White,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Medium
@@ -388,7 +390,7 @@ fun TopSection(score: Float, streak: Int, onStreakClick: () -> Unit) {
 fun GreetingSection(userName: String, onEditNameClick: () -> Unit) {
     Column {
         Text(
-            text = "Buenos días,",
+            text = stringResource(R.string.greeting_morning),
             color = InquiTextMuted,
             fontSize = 32.sp,
             fontFamily = FontFamily.Serif,
@@ -409,7 +411,7 @@ fun GreetingSection(userName: String, onEditNameClick: () -> Unit) {
             )
             Icon(
                 imageVector = Icons.Default.Edit,
-                contentDescription = "Editar nombre",
+                contentDescription = stringResource(R.string.edit_name_title),
                 tint = InquiTextMuted,
                 modifier = Modifier.padding(start = 12.dp).size(20.dp)
             )
@@ -438,14 +440,14 @@ fun MiddleSection(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            SectionTitle(title = "REGISTRAR")
+            SectionTitle(title = stringResource(R.string.section_register))
             ActivityButton(
-                title = "Actividad ($leisureCount)", 
+                title = stringResource(R.string.btn_activity_count, leisureCount), 
                 icon = Icons.Default.PlayArrow,
                 onClick = onAddLeisure
             )
             ActivityButton(
-                title = "Actividad+ ($effortCount)", 
+                title = stringResource(R.string.btn_activity_plus_count, effortCount), 
                 icon = Icons.Default.Add,
                 onClick = onAddEffort
             )
@@ -464,7 +466,7 @@ fun MiddleSection(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "ACTUALIZAR\nLISTA DIARIA",
+                    text = stringResource(R.string.section_daily_list),
                     color = InquiTextMuted,
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
@@ -473,13 +475,13 @@ fun MiddleSection(
                 Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     Icon(
                         imageVector = Icons.Default.Edit,
-                        contentDescription = "Editar",
+                        contentDescription = stringResource(R.string.edit),
                         tint = InquiTextMuted,
                         modifier = Modifier.size(16.dp)
                     )
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.CallMade, // Flecha diagonal
-                        contentDescription = "Ir",
+                        contentDescription = stringResource(R.string.nav_home),
                         tint = InquiTextMuted,
                         modifier = Modifier.size(16.dp)
                     )
@@ -496,7 +498,7 @@ fun MiddleSection(
                 Column {
                     if (pendingLogs.isEmpty()) {
                         Text(
-                            text = "Aún no hay actividades",
+                            text = stringResource(R.string.daily_list_empty),
                             color = InquiTextMuted,
                             fontSize = 12.sp,
                             modifier = Modifier.padding(16.dp)
@@ -660,7 +662,7 @@ fun WorkBlockSection(
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        SectionTitle(title = "BLOQUE DE TRABAJO")
+        SectionTitle(title = stringResource(R.string.section_work_block))
         
         if (uiState.currentWeekObjectives.isEmpty()) {
             Card(
@@ -678,13 +680,13 @@ fun WorkBlockSection(
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "Registrar Bloque de Trabajo",
+                            text = stringResource(R.string.work_block_register_title),
                             color = InquiGold,
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = "Define tus objetivos mayoritarios de la semana (representa el 30% de tu media semanal)",
+                            text = stringResource(R.string.work_block_register_sub),
                             color = InquiTextMuted,
                             fontSize = 12.sp,
                             modifier = Modifier.padding(top = 4.dp)
@@ -698,7 +700,7 @@ fun WorkBlockSection(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Add,
-                            contentDescription = "Añadir Bloque",
+                            contentDescription = stringResource(R.string.work_block_register_title),
                             tint = InquiGold,
                             modifier = Modifier.size(24.dp)
                         )
@@ -718,19 +720,19 @@ fun WorkBlockSection(
                 ) {
                     Icon(
                         imageVector = Icons.Default.EmojiEvents,
-                        contentDescription = "Completado",
+                        contentDescription = stringResource(R.string.work_block_completed_title),
                         tint = InquiGold,
                         modifier = Modifier.size(48.dp)
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                     Text(
-                        text = "¡Bloque Semanal Completado! (100%)",
+                        text = stringResource(R.string.work_block_completed_title),
                         color = Color.White,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "Has asegurado el 30% semanal. El próximo bloque se habilitará el lunes.",
+                        text = stringResource(R.string.work_block_completed_sub),
                         color = InquiTextMuted,
                         fontSize = 12.sp,
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center,
@@ -759,13 +761,13 @@ fun WorkBlockSection(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = uiState.currentWeekObjectives.firstOrNull()?.blockTitle ?: "Bloque Actual",
+                            text = uiState.currentWeekObjectives.firstOrNull()?.blockTitle ?: stringResource(R.string.work_block_current_title),
                             color = Color.White,
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = "$completed de $total objetivos (${pct.toInt()}%)",
+                            text = stringResource(R.string.work_block_progress_text, completed, total, pct.toInt()),
                             color = InquiGold,
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold
@@ -940,7 +942,7 @@ fun InquiBottomNavigationBar(navController: NavController? = null) {
             IconButton(onClick = { navController?.navigate("home") { popUpTo(0) } }) {
                 Icon(
                     imageVector = Icons.Default.Home,
-                    contentDescription = "Inicio",
+                    contentDescription = stringResource(R.string.nav_home),
                     tint = if (isHome) InquiGold else InquiTextMuted
                 )
             }
@@ -959,14 +961,14 @@ fun InquiBottomNavigationBar(navController: NavController? = null) {
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.TrendingUp,
-                    contentDescription = "Estadísticas",
+                    contentDescription = stringResource(R.string.nav_stats),
                     tint = if (isStats) InquiGold else InquiTextMuted
                 )
             }
             IconButton(onClick = { navController?.navigate("settings") }) {
                 Icon(
                     imageVector = Icons.Default.Settings,
-                    contentDescription = "Ajustes",
+                    contentDescription = stringResource(R.string.nav_settings),
                     tint = if (isSettings) InquiGold else InquiTextMuted
                 )
             }
@@ -1080,12 +1082,12 @@ fun StreakBottomSheet(
                 IconButton(onClick = onDismiss, modifier = Modifier.size(32.dp)) {
                     Icon(
                         imageVector = Icons.Default.Close,
-                        contentDescription = "Cerrar",
+                        contentDescription = stringResource(R.string.cancel),
                         tint = InquiTextMuted
                     )
                 }
                 Text(
-                    text = "Días de racha",
+                    text = stringResource(R.string.streak_days_title),
                     color = Color.White,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
@@ -1108,7 +1110,7 @@ fun StreakBottomSheet(
                         lineHeight = 56.sp
                     )
                     Text(
-                        text = if (streak == 1) "día de racha" else "días de racha",
+                        text = if (streak == 1) stringResource(R.string.streak_single_day) else stringResource(R.string.streak_plural_days),
                         color = InquiTextMuted,
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium
@@ -1130,7 +1132,7 @@ fun StreakBottomSheet(
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Text(
-                        text = if (isStreakSavedToday) "¡Sigue con este ritmo! Tu constancia se nota." else "¡Escribe tus actividades hoy para mantener tu racha viva!",
+                        text = if (isStreakSavedToday) stringResource(R.string.streak_motivation_saved) else stringResource(R.string.streak_motivation_unsaved),
                         color = Color.White,
                         fontSize = 13.sp,
                         lineHeight = 18.sp
@@ -1142,9 +1144,13 @@ fun StreakBottomSheet(
             Column(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                val monthNameFormatter = java.time.format.DateTimeFormatter.ofPattern("MMMM 'de' yyyy", Locale("es", "ES"))
+                val currentLocale = Locale.getDefault()
+                val monthNameFormatter = java.time.format.DateTimeFormatter.ofPattern(
+                    if (currentLocale.language == "es") "MMMM 'de' yyyy" else "MMMM yyyy",
+                    currentLocale
+                )
                 val formattedMonthName = selectedYearMonth.format(monthNameFormatter)
-                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale("es", "ES")) else it.toString() }
+                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(currentLocale) else it.toString() }
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -1154,7 +1160,7 @@ fun StreakBottomSheet(
                     IconButton(onClick = { selectedYearMonth = selectedYearMonth.minusMonths(1) }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                            contentDescription = "Mes anterior",
+                            contentDescription = stringResource(R.string.back),
                             tint = InquiGold
                         )
                     }
@@ -1167,7 +1173,7 @@ fun StreakBottomSheet(
                     IconButton(onClick = { selectedYearMonth = selectedYearMonth.plusMonths(1) }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                            contentDescription = "Mes siguiente",
+                            contentDescription = stringResource(R.string.continue_text),
                             tint = InquiGold
                         )
                     }
@@ -1277,7 +1283,7 @@ fun StreakBottomSheet(
 
             // 5. Meta de racha (Sección inferior)
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                SectionTitle(title = "META DE RACHA")
+                SectionTitle(title = stringResource(R.string.section_streak_goal))
 
                 val milestones = listOf(7, 14, 30, 50, 100)
                 val targetMilestone = milestones.firstOrNull { it > streak } ?: (streak + 10)
@@ -1292,7 +1298,7 @@ fun StreakBottomSheet(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Objetivo: $targetMilestone días",
+                        text = stringResource(R.string.streak_goal_target, targetMilestone),
                         color = Color.White,
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold
@@ -1364,7 +1370,7 @@ fun StreakBottomSheet(
                 colors = ButtonDefaults.buttonColors(containerColor = InquiGold)
             ) {
                 Text(
-                    text = "Continuar",
+                    text = stringResource(R.string.continue_text),
                     color = InquiDarkBackground,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold

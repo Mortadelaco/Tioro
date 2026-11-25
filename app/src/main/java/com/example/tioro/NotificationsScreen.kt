@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import android.Manifest
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -20,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
+
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,7 +57,7 @@ fun NotificationsScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Notificaciones",
+                        text = stringResource(R.string.notifications_screen_title),
                         color = Color.White,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold
@@ -64,7 +67,7 @@ fun NotificationsScreen(
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Atrás",
+                            contentDescription = stringResource(R.string.back),
                             tint = Color.White
                         )
                     }
@@ -96,13 +99,13 @@ fun NotificationsScreen(
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "Recordatorios Inteligentes",
+                            text = stringResource(R.string.notifications_card_title),
                             color = Color.White,
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = "Recibe avisos para mantener tu racha si tu lista está vacía.",
+                            text = stringResource(R.string.notifications_card_sub),
                             color = InquiTextMuted,
                             fontSize = 12.sp,
                             modifier = Modifier.padding(top = 4.dp)
@@ -136,18 +139,20 @@ fun NotificationsScreen(
             }
 
             if (notificationsEnabled) {
+                val testTitle = stringResource(R.string.test_notification_title)
+                val testText = stringResource(R.string.test_notification_text)
                 Button(
                     onClick = {
                         TioroNotificationManager.showNotification(
                             context,
-                            "¡Hola desde Tioro!",
-                            "Las notificaciones funcionan correctamente."
+                            testTitle,
+                            testText
                         )
                     },
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     colors = ButtonDefaults.buttonColors(containerColor = InquiButtonInner)
                 ) {
-                    Text("Probar notificación ahora", color = InquiGold)
+                    Text(stringResource(R.string.btn_test_notification), color = InquiGold)
                 }
             }
         }

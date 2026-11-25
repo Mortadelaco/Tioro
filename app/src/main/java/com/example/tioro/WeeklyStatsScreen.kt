@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -14,6 +15,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -79,7 +81,7 @@ fun WeeklyStatsContent(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Estadísticas Semanales",
+                        text = stringResource(R.string.stats_weekly_title),
                         color = Color.White,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
@@ -97,7 +99,7 @@ fun WeeklyStatsContent(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Atrás",
+                            contentDescription = stringResource(R.string.back),
                             tint = Color.White,
                             modifier = Modifier.size(20.dp)
                         )
@@ -143,7 +145,7 @@ fun ChartSection(activityPoints: List<Float>) {
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
-                text = "DESEMPEÑO SEMANAL",
+                text = stringResource(R.string.chart_header_weekly),
                 color = InquiTextMuted,
                 fontSize = 11.sp,
                 fontWeight = FontWeight.Bold,
@@ -154,7 +156,7 @@ fun ChartSection(activityPoints: List<Float>) {
 
             // Leyenda
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                LegendItem("Actividades", InquiGold)
+                LegendItem(stringResource(R.string.legend_activities), InquiGold)
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -291,7 +293,7 @@ fun RadialProgressSection(percentage: Int) {
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "Media total",
+                        text = stringResource(R.string.label_total_average),
                         color = InquiTextMuted,
                         fontSize = 10.sp
                     )
@@ -303,7 +305,7 @@ fun RadialProgressSection(percentage: Int) {
             // Texto descriptivo a la derecha
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = "Ritmo constante",
+                    text = stringResource(R.string.weekly_radial_title),
                     color = InquiGold,
                     fontSize = 22.sp,
                     fontFamily = FontFamily.Serif,
@@ -311,7 +313,7 @@ fun RadialProgressSection(percentage: Int) {
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Has completado la mayoría de tus objetivos programados para esta semana. ¡Sigue así!",
+                    text = stringResource(R.string.weekly_radial_sub),
                     color = InquiTextMuted,
                     fontSize = 12.sp,
                     lineHeight = 16.sp
@@ -324,9 +326,9 @@ fun RadialProgressSection(percentage: Int) {
 @Composable
 fun LinearProgressBarsSection(effortPct: Float, leisurePct: Float, projectsPct: Float) {
     Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
-        LinearProgressItem("Actividades+", effortPct)
-        LinearProgressItem("Actividades", leisurePct)
-        LinearProgressItem("Bloque de Trabajo", projectsPct)
+        LinearProgressItem(stringResource(R.string.label_activities_plus), effortPct)
+        LinearProgressItem(stringResource(R.string.label_activities), leisurePct)
+        LinearProgressItem(stringResource(R.string.label_work_block), projectsPct)
     }
 }
 
@@ -385,14 +387,14 @@ fun MonthlyDataButton(onClick: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Consultar datos mensuales",
+                text = stringResource(R.string.btn_consult_monthly),
                 color = Color.White,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium
             )
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = "Ir",
+                contentDescription = stringResource(R.string.continue_text),
                 tint = InquiGold,
                 modifier = Modifier.size(20.dp)
             )

@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
@@ -73,14 +74,19 @@ class TioroWidgetProvider : AppWidgetProvider() {
 
                 appWidgetIds.forEach { widgetId ->
                     val views = RemoteViews(context.packageName, R.layout.widget_tioro).apply {
+                        val scoreFormatted = String.format(Locale.getDefault(), "%.1f", todayScore)
                         setTextViewText(
                             R.id.widget_score_text,
-                            "Nota hoy: ${String.format(Locale.getDefault(), "%.1f", todayScore)}"
+                            context.getString(R.string.widget_score_text_format, scoreFormatted)
                         )
                         setTextViewText(R.id.widget_streak_text, "🔥 $streak")
                         setTextViewText(
                             R.id.widget_block_text,
-                            "Bloque semanal: $completedObjs/$totalObjs objetivos"
+                            context.getString(R.string.widget_block_text_format, completedObjs, totalObjs)
+                        )
+                        setTextViewText(
+                            R.id.widget_add_button,
+                            context.getString(R.string.widget_btn_add_activity)
                         )
                         setOnClickPendingIntent(R.id.widget_container, pendingIntent)
                         setOnClickPendingIntent(R.id.widget_add_button, pendingIntent)

@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
@@ -34,11 +35,11 @@ class TioroNotificationWorker(
                 val logs = dao.getLogsByDateSnapshot(today)
                 if (logs.isEmpty()) {
                     val (title, content) = when (hour) {
-                        9 -> "¿Otro día improvisando? 👀" to "Abre Tioro y registra qué vas a hacer hoy antes de que se te escape la mañana."
-                        12 -> "Mediodía y tu lista sigue en blanco... 🤨" to "No me hagas empezar a contar horas muertas. Registra tus actividades."
-                        15 -> "¿Post-comida sin plan? 🛋️" to "Acuérdate de registrar tus actividades de hoy. Tu media semanal está mirando."
-                        18 -> "Última llamada de la tarde ⏳" to "Todavía puedes salvar el día, pero si no registras nada, el cero no perdona."
-                        else -> "Recuerda registrar tus tareas" to "Abre Inqui y ponte al día."
+                        9 -> appContext.getString(R.string.notif_blanco_9_title) to appContext.getString(R.string.notif_blanco_9_sub)
+                        12 -> appContext.getString(R.string.notif_blanco_12_title) to appContext.getString(R.string.notif_blanco_12_sub)
+                        15 -> appContext.getString(R.string.notif_blanco_15_title) to appContext.getString(R.string.notif_blanco_15_sub)
+                        18 -> appContext.getString(R.string.notif_blanco_18_title) to appContext.getString(R.string.notif_blanco_18_sub)
+                        else -> appContext.getString(R.string.notif_blanco_default_title) to appContext.getString(R.string.notif_blanco_default_sub)
                     }
                     TioroNotificationManager.showNotification(appContext, title, content)
                 }
@@ -49,8 +50,8 @@ class TioroNotificationWorker(
                 val allCompleted = logs.isNotEmpty() && logs.all { it.isCompleted }
                 if (!allCompleted) {
                     val (title, content) = when (hour) {
-                        23 -> "El día agoniza... 🔥" to "Queda una hora para medianoche. Termina de actualizar tus actividades o despídete de la nota."
-                        else -> "15 minutos para medianoche 🚨" to "Último aviso antes de dormir: cierra tus actividades de hoy o mañana tocará dar explicaciones." // 23:45
+                        23 -> appContext.getString(R.string.notif_cierre_23_title) to appContext.getString(R.string.notif_cierre_23_sub)
+                        else -> appContext.getString(R.string.notif_cierre_2345_title) to appContext.getString(R.string.notif_cierre_2345_sub) // 23:45
                     }
                     TioroNotificationManager.showNotification(appContext, title, content)
                 }
@@ -64,8 +65,8 @@ class TioroNotificationWorker(
                     if (!allCompleted) {
                         TioroNotificationManager.showNotification(
                             appContext,
-                            "Es domingo y tu Bloque de Trabajo te mira mal 👀",
-                            "Tienes hasta medianoche para actualizar tus objetivos semanales (recuerda: vale el 30% de tu semana)."
+                            appContext.getString(R.string.notif_domingo_title),
+                            appContext.getString(R.string.notif_domingo_sub)
                         )
                     }
                 }
@@ -78,12 +79,27 @@ class TioroNotificationWorker(
                     if (logs.any { !it.isCompleted }) {
                         TioroNotificationManager.showNotification(
                             appContext,
-                            "¿Cómo va eso o solo las pusiste de adorno? 👀",
-                            "Llevas 5 horas desde tu último registro. Entra y tacha lo que ya hayas hecho."
+                            appContext.getString(R.string.notif_followup_title),
+                            appContext.getString(R.string.notif_followup_sub)
                         )
                         // Reprogramamos otras 5 horas
                         TioroNotificationManager.scheduleFollowUpReminder(appContext)
                     }
+                }
+            }
+
+            "WIDGET_DISCOVERY" -> {
+                val appWidgetManager = android.appwidget.AppWidgetManager.getInstance(appContext)
+                val mainWidgetIds = appWidgetManager.getAppWidgetIds(android.content.ComponentName(appContext, TioroWidgetProvider::class.java))
+                val streakWidgetIds = appWidgetManager.getAppWidgetIds(android.content.ComponentName(appContext, TioroStreakWidgetProvider::class.java))
+                val hasAnyWidgetPlaced = mainWidgetIds.isNotEmpty() || streakWidgetIds.isNotEmpty()
+                
+                if (!hasAnyWidgetPlaced) {
+                    TioroNotificationManager.showNotification(
+                        appContext,
+                        appContext.getString(R.string.notif_widget_discovery_title),
+                        appContext.getString(R.string.notif_widget_discovery_sub)
+                    )
                 }
             }
         }

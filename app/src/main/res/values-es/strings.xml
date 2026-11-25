@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tioro</string>
+
+    <!-- Common -->
+    <string name="nav_home">Inicio</string>
+    <string name="nav_stats">Estadísticas</string>
+    <string name="nav_settings">Ajustes</string>
+    <string name="back">Atrás</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Guardar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="continue_text">Continuar</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Eliminar</string>
+
+    <!-- Welcome -->
+    <string name="welcome_title">Bienvenido</string>
+    <string name="welcome_subtitle">¿Cómo te llamas?</string>
+    <string name="welcome_name_placeholder">Tu nombre</string>
+    <string name="welcome_start_button">Empezar</string>
+
+    <!-- Home Header & Content -->
+    <string name="score_today">Nota hoy: %s</string>
+    <string name="greeting_morning">Buenos días,</string>
+    <string name="edit_name_title">Cambiar nombre</string>
+    <string name="section_register">REGISTRAR</string>
+    <string name="btn_activity_count">Actividad (%d)</string>
+    <string name="btn_activity_plus_count">Actividad+ (%d)</string>
+    <string name="section_daily_list">ACTUALIZAR\nLISTA DIARIA</string>
+    <string name="daily_list_empty">Aún no hay actividades</string>
+    <string name="edit_activity_title">Editar Actividad</string>
+    <string name="section_work_block">BLOQUE DE TRABAJO</string>
+    <string name="work_block_register_title">Registrar Bloque de Trabajo</string>
+    <string name="work_block_register_sub">Define tus objetivos mayoritarios de la semana (representa el 30%% de tu media semanal)</string>
+    <string name="work_block_completed_title">¡Bloque Semanal Completado! (100%%)</string>
+    <string name="work_block_completed_sub">Has asegurado el 30%% semanal. El próximo bloque se habilitará el lunes.</string>
+    <string name="work_block_current_title">Bloque Actual</string>
+    <string name="work_block_progress_text">%1$d de %2$d objetivos (%3$d%%)</string>
+
+    <!-- Streak Bottom Sheet -->
+    <string name="streak_days_title">Días de racha</string>
+    <string name="streak_single_day">día de racha</string>
+    <string name="streak_plural_days">días de racha</string>
+    <string name="streak_motivation_saved">¡Sigue con este ritmo! Tu constancia se nota.</string>
+    <string name="streak_motivation_unsaved">¡Escribe tus actividades hoy para mantener tu racha viva!</string>
+    <string name="section_streak_goal">META DE RACHA</string>
+    <string name="streak_goal_target">Objetivo: %d días</string>
+
+    <!-- Full Daily List -->
+    <string name="daily_list_full_title">Lista Diaria Completa</string>
+    <string name="daily_list_no_logs_today">Aún no hay actividades registradas hoy.</string>
+    <string name="section_activities">ACTIVIDADES</string>
+
+    <!-- Register Activity -->
+    <string name="register_activity_screen_title">Registrar Actividad</string>
+    <string name="label_name">NOMBRE</string>
+    <string name="label_frequency">FRECUENCIA</string>
+    <string name="switch_daily_frequency">¿Se repetirá con frecuencia diaria?</string>
+
+    <!-- Work Block Screen -->
+    <string name="work_block_screen_title">Bloque de Trabajo</string>
+    <string name="work_block_locked_banner">Bloque Semanal Completado al 100%%. No puedes realizar modificaciones hasta el próximo lunes.</string>
+    <string name="label_block_title">TÍTULO DEL BLOQUE</string>
+    <string name="placeholder_block_title">Ej: Desarrollo MVP</string>
+    <string name="label_objectives">OBJETIVOS</string>
+    <string name="placeholder_new_objective">Nuevo objetivo...</string>
+
+    <!-- Statistics -->
+    <string name="stats_weekly_title">Estadísticas Semanales</string>
+    <string name="stats_monthly_title">Estadísticas Mensuales</string>
+    <string name="stats_annual_title">Estadísticas Anuales</string>
+    <string name="chart_header_weekly">DESEMPEÑO SEMANAL</string>
+    <string name="chart_header_monthly">RENDIMIENTO MENSUAL</string>
+    <string name="chart_header_annual">RENDIMIENTO ANUAL HISTÓRICO</string>
+    <string name="legend_activities">Actividades</string>
+    <string name="label_total_average">Media total</string>
+    <string name="label_annual_average">Media</string>
+    <string name="weekly_radial_title">Ritmo constante</string>
+    <string name="weekly_radial_sub">Has completado la mayoría de tus objetivos programados para esta semana. ¡Sigue así!</string>
+    <string name="monthly_radial_title">Objetivos del mes</string>
+    <string name="monthly_radial_sub">Buen rendimiento general. Has superado la mayoría de tus métricas previstas durante las últimas semanas.</string>
+    <string name="label_activities_plus">Actividades+</string>
+    <string name="label_activities">Actividades</string>
+    <string name="label_work_block">Bloque de Trabajo</string>
+    <string name="btn_consult_monthly">Consultar datos mensuales</string>
+    <string name="btn_consult_annual">Consultar estadísticas anuales</string>
+    <string name="section_weekly_medals">MEDALLAS SEMANALES</string>
+    <string name="section_annual_medals">MEDALLAS DEL AÑO</string>
+    <string name="medal_week_prefix">Sem %d</string>
+
+    <!-- Backup Screen -->
+    <string name="backup_screen_title">Máquina del Tiempo</string>
+    <string name="backup_disclaimer">Usa el Backup como un salvavidas excepcional para días olvidados, no como una costumbre. La honestidad es la base de Tioro.</string>
+    <string name="label_selected_date">FECHA SELECCIONADA</string>
+    <string name="label_day_score">NOTA DEL DÍA</string>
+    <string name="streak_saved_status">Racha a salvo</string>
+    <string name="streak_lost_status">Racha perdida</string>
+    <string name="backup_no_records">No hay registros en esta fecha.</string>
+    <string name="add_past_activity_title">Añadir Actividad Pasada</string>
+    <string name="placeholder_activity_name">Nombre de la actividad</string>
+    <string name="checkbox_effort_description">Es Actividad+ (Mayor esfuerzo)</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_screen_title">Configuración</string>
+    <string name="settings_group_preferences">PREFERENCIAS</string>
+    <string name="settings_item_notifications">Notificaciones</string>
+    <string name="settings_group_maintenance">MANTENIMIENTO</string>
+    <string name="settings_item_backup">Backup (Máquina del Tiempo)</string>
+    <string name="settings_group_data">DATOS Y COPIA DE SEGURIDAD</string>
+    <string name="settings_export_json">Exportar copia local (.json)</string>
+    <string name="settings_import_json">Restaurar copia (.json)</string>
+    <string name="settings_group_system">SISTEMA</string>
+    <string name="settings_about_app">Acerca de Tioro</string>
+    <string name="restore_dialog_title">Restaurar Copia de Seguridad</string>
+    <string name="restore_dialog_text">Esto sustituirá tus datos actuales por los de la copia importada. ¿Deseas continuar?</string>
+    <string name="toast_export_success">Copia de seguridad exportada con éxito</string>
+    <string name="toast_export_error">Error al exportar la copia</string>
+    <string name="toast_import_success">Copia restaurada correctamente</string>
+    <string name="toast_import_invalid">Archivo de copia no válido</string>
+    <string name="toast_import_error">Error al restaurar la copia</string>
+
+    <!-- Notifications Screen -->
+    <string name="notifications_screen_title">Notificaciones</string>
+    <string name="notifications_card_title">Recordatorios Inteligentes</string>
+    <string name="notifications_card_sub">Recibe avisos para mantener tu racha si tu lista está vacía.</string>
+    <string name="btn_test_notification">Probar notificación ahora</string>
+    <string name="test_notification_title">¡Hola desde Tioro!</string>
+    <string name="test_notification_text">Las notificaciones funcionan correctamente.</string>
+
+    <!-- Monday Recap -->
+    <string name="recap_dialog_title">Resumen de tu semana</string>
+    <string name="recap_medal_earned">🏆 ¡Medalla semanal conseguida!</string>
+    <string name="recap_medal_missed">Semana cerrada sin medalla</string>
+    <string name="recap_carried_over">Se han arrastrado %d objetivos pendientes del Bloque de Trabajo a esta nueva semana.</string>
+    <string name="recap_block_100">¡Completaste al 100%% los objetivos de tu Bloque de Trabajo de la semana anterior!</string>
+    <string name="btn_start_new_week">Empezar nueva semana</string>
+
+    <!-- Confirmation Screen -->
+    <string name="confirmation_title_default">¡Excelente!</string>
+    <string name="confirmation_activity_sub">Actividad registrada</string>
+    <string name="confirmation_project_sub">Proyecto registrado</string>
+
+    <!-- Notifications Workers -->
+    <string name="notif_channel_name">Recordatorios de Tioro</string>
+    <string name="notif_channel_desc">Notificaciones para recordarte que registres tus actividades</string>
+    <string name="notif_blanco_9_title">¿Otro día improvisando? 👀</string>
+    <string name="notif_blanco_9_sub">Abre Tioro y registra qué vas a hacer hoy antes de que se te escape la mañana.</string>
+    <string name="notif_blanco_12_title">Mediodía y tu lista sigue en blanco... 🤨</string>
+    <string name="notif_blanco_12_sub">No me hagas empezar a contar horas muertas. Registra tus actividades.</string>
+    <string name="notif_blanco_15_title">¿Post-comida sin plan? 🛋️</string>
+    <string name="notif_blanco_15_sub">Acuérdate de registrar tus actividades de hoy. Tu media semanal está mirando.</string>
+    <string name="notif_blanco_18_title">Última llamada de la tarde ⏳</string>
+    <string name="notif_blanco_18_sub">Todavía puedes salvar el día, pero si no registras nada, el cero no perdona.</string>
+    <string name="notif_blanco_default_title">Recuerda registrar tus tareas</string>
+    <string name="notif_blanco_default_sub">Abre Inqui y ponte al día.</string>
+    <string name="notif_cierre_23_title">El día agoniza... 🔥</string>
+    <string name="notif_cierre_23_sub">Queda una hora para medianoche. Termina de actualizar tus actividades o despídete de la nota.</string>
+    <string name="notif_cierre_2345_title">15 minutos para medianoche 🚨</string>
+    <string name="notif_cierre_2345_sub">Último aviso antes de dormir: cierra tus actividades de hoy o mañana tocará dar explicaciones.</string>
+    <string name="notif_domingo_title">Es domingo y tu Bloque de Trabajo te mira mal 👀</string>
+    <string name="notif_domingo_sub">Tienes hasta medianoche para actualizar tus objetivos semanales (recuerda: vale el 30%% de tu semana).</string>
+    <string name="notif_followup_title">¿Cómo va eso o solo las pusiste de adorno? 👀</string>
+    <string name="notif_followup_sub">Llevas 5 horas desde tu último registro. Entra y tacha lo que ya hayas hecho.</string>
+
+    <!-- Desktop Widget -->
+    <string name="widget_score_text_format">Nota hoy: %s</string>
+    <string name="widget_block_text_format">Bloque semanal: %1$d/%2$d objetivos</string>
+    <string name="widget_btn_add_activity">+ Actividad</string>
+    <string name="notif_widget_discovery_title">¿Tu pantalla de inicio sigue vacía? 👀</string>
+    <string name="notif_widget_discovery_sub">Tienes widgets de Tioro listos para añadir a tu escritorio y vigilar tu racha sin abrir la app.</string>
+    <string name="widget_streak_today_saved">Racha a salvo hoy</string>
+    <string name="widget_streak_today_unsaved">Registra actividades hoy</string>
+    <!-- Branding Tagline & Startup -->
+    <string name="app_tagline">Organiza tu tiempo y tu trabajo con honestidad.</string>
+
+    <!-- Tutorial -->
+    <string name="tutorial_skip">Saltar</string>
+    <string name="tutorial_next">Siguiente</string>
+    <string name="tutorial_start">Empezar</string>
+    <string name="settings_replay_tutorial">Ver tutorial</string>
+
+    <string name="tutorial_title_1">Tiempo con intención</string>
+    <string name="tutorial_body_1">Tioro no busca que trabajes 24/7 ni que te sientas culpable por descansar. Organiza tu día con honestidad: disfruta de tu ocio sabiendo que te lo has ganado.</string>
+
+    <string name="tutorial_title_2">Dos tipos de acciones</string>
+    <string name="tutorial_body_2">Registra tus tareas cotidianas u ocio como Actividad, y reserva Actividad+ para lo que requiere verdadero esfuerzo o prioridad. Equilibra ambas para aprobar tu día.</string>
+
+    <string name="tutorial_title_3">Constancia real, semana a semana</string>
+    <string name="tutorial_body_3">Define tus objetivos clave en el Bloque de Trabajo (representa el 30%% de tu esfuerzo semanal) y supera el 50%% diario para mantener encendida tu racha.</string>
+
+    <string name="tutorial_title_4">Flexible, 100%% tuyo y totalmente gratis</string>
+    <string name="tutorial_body_4">¿Olvidaste anotar algo ayer? Usa Backup para viajar atrás y actualizar cualquier día. Todo se guarda exclusivamente en tu móvil: sin cuentas, sin nube y totalmente gratis.</string>
+</resources>

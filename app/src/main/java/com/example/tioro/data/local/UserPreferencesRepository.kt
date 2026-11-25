@@ -49,4 +49,16 @@ class UserPreferencesRepository(private val dataStore: DataStore<Preferences>) {
             preferences[LAST_RECAP_WEEK_KEY] = weekMondayDate
         }
     }
+
+    private val HAS_COMPLETED_TUTORIAL_KEY = androidx.datastore.preferences.core.booleanPreferencesKey("has_completed_tutorial")
+
+    val hasCompletedTutorialFlow: Flow<Boolean> = dataStore.data.map { preferences ->
+        preferences[HAS_COMPLETED_TUTORIAL_KEY] ?: false
+    }
+
+    suspend fun saveTutorialCompleted(completed: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[HAS_COMPLETED_TUTORIAL_KEY] = completed
+        }
+    }
 }

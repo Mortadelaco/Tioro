@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -18,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
+import androidx.compose.ui.res.stringResource
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegistrarActividadScreen(
@@ -35,7 +38,7 @@ fun RegistrarActividadScreen(
             TopAppBar(
                 title = { 
                     Text(
-                        text = "Registrar Actividad",
+                        text = stringResource(R.string.register_activity_screen_title),
                         color = Color.White,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold
@@ -45,7 +48,7 @@ fun RegistrarActividadScreen(
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Atrás",
+                            contentDescription = stringResource(R.string.back),
                             tint = Color.White
                         )
                     }
@@ -68,7 +71,7 @@ fun RegistrarActividadScreen(
                 // Campo de Texto
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
-                        text = "NOMBRE",
+                        text = stringResource(R.string.label_name),
                         color = InquiTextMuted,
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
@@ -95,7 +98,7 @@ fun RegistrarActividadScreen(
                 // Selector de frecuencia
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
-                        text = "FRECUENCIA",
+                        text = stringResource(R.string.label_frequency),
                         color = InquiTextMuted,
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
@@ -110,7 +113,7 @@ fun RegistrarActividadScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "¿Se repetirá con frecuencia diaria?",
+                            text = stringResource(R.string.switch_daily_frequency),
                             color = Color.White,
                             fontSize = 14.sp
                         )
@@ -192,7 +195,7 @@ fun RegistrarActividadScreen(
                 )
             ) {
                 Text(
-                    text = "Confirmar",
+                    text = stringResource(R.string.confirm),
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp
                 )

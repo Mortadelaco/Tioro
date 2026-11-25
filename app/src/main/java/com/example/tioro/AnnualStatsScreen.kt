@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,6 +15,7 @@ import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -72,7 +74,7 @@ fun AnnualStatsContent(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Estadísticas Anuales",
+                        text = stringResource(R.string.stats_annual_title),
                         color = Color.White,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
@@ -90,7 +92,7 @@ fun AnnualStatsContent(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Atrás",
+                            contentDescription = stringResource(R.string.back),
                             tint = Color.White,
                             modifier = Modifier.size(20.dp)
                         )
@@ -135,7 +137,7 @@ fun AnnualChartSection(activityPoints: List<Float>) {
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
-                text = "RENDIMIENTO ANUAL HISTÓRICO",
+                text = stringResource(R.string.chart_header_annual),
                 color = InquiTextMuted,
                 fontSize = 11.sp,
                 fontWeight = FontWeight.Bold,
@@ -255,7 +257,7 @@ fun AnnualSummarySection(percentage: Int, effortPct: Float, leisurePct: Float, p
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "Media",
+                        text = stringResource(R.string.label_annual_average),
                         color = InquiTextMuted,
                         fontSize = 10.sp
                     )
@@ -269,9 +271,9 @@ fun AnnualSummarySection(percentage: Int, effortPct: Float, leisurePct: Float, p
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                AnnualLinearProgressItem("Actividades+", effortPct)
-                AnnualLinearProgressItem("Actividades", leisurePct)
-                AnnualLinearProgressItem("Proyectos", projectsPct)
+                AnnualLinearProgressItem(stringResource(R.string.label_activities_plus), effortPct)
+                AnnualLinearProgressItem(stringResource(R.string.label_activities), leisurePct)
+                AnnualLinearProgressItem(stringResource(R.string.label_work_block), projectsPct)
             }
         }
     }
@@ -322,7 +324,7 @@ fun AnnualMedalsSection(medals: List<Boolean>) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        SectionTitle(title = "MEDALLAS DEL AÑO")
+        SectionTitle(title = stringResource(R.string.section_annual_medals))
         Spacer(modifier = Modifier.height(16.dp))
         
         LazyVerticalGrid(

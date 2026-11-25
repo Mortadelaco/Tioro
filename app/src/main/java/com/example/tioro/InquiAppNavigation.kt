@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavType
@@ -23,6 +24,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun InquiAppNavigation(viewModel: InquiViewModel) {
@@ -35,7 +37,7 @@ fun InquiAppNavigation(viewModel: InquiViewModel) {
         return
     }
 
-    val startDestination = if (uiState.userName.isNullOrBlank()) "welcome" else "home"
+    val startDestination = "splash"
     val navController = rememberNavController()
 
     NavHost(
@@ -47,14 +49,34 @@ fun InquiAppNavigation(viewModel: InquiViewModel) {
         popExitTransition = { ExitTransition.None }
     ) {
         
+        composable("splash") {
+            StartupSplashScreen(
+                navController = navController,
+                viewModel = viewModel
+            )
+        }
+
         composable("welcome") {
             WelcomeScreen(
                 onSaveName = { name ->
                     viewModel.saveUserName(name)
-                    navController.navigate("home") {
+                    navController.navigate("tutorial") {
                         popUpTo("welcome") { inclusive = true }
                     }
                 }
+            )
+        }
+
+        composable(
+            "tutorial",
+            enterTransition = { slideInHorizontally(initialOffsetX = { it }, animationSpec = tween(250)) + fadeIn(tween(200)) },
+            exitTransition = { fadeOut(tween(250)) },
+            popEnterTransition = { fadeIn(tween(250)) },
+            popExitTransition = { slideOutHorizontally(targetOffsetX = { it }, animationSpec = tween(250)) + fadeOut(tween(200)) }
+        ) {
+            TutorialScreen(
+                navController = navController,
+                viewModel = viewModel
             )
         }
 
@@ -202,8 +224,8 @@ fun InquiAppNavigation(viewModel: InquiViewModel) {
         ) {
             ConfirmationScreen(
                 navController = navController,
-                title = "¡Excelente!",
-                subtitle = "Actividad registrada",
+                title = stringResource(R.string.confirmation_title_default),
+                subtitle = stringResource(R.string.confirmation_activity_sub),
                 accentColor = Color(0xFFE5C07B)
             )
         }

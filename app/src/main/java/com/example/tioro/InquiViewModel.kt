@@ -36,6 +36,7 @@ data class MondayRecapData(
 
 data class InquiUiState(
     val isAppLoading: Boolean = true,
+    val hasCompletedTutorial: Boolean = false,
     val userName: String? = null,
     val leisureCount: Int = 0,
     val effortCount: Int = 0,
@@ -98,6 +99,11 @@ class InquiViewModel(
             }
         }
         viewModelScope.launch {
+            userPrefs.hasCompletedTutorialFlow.collect { completed ->
+                _uiState.value = _uiState.value.copy(hasCompletedTutorial = completed)
+            }
+        }
+        viewModelScope.launch {
             userPrefs.notificationsEnabledFlow.collect { enabled ->
                 _uiState.value = _uiState.value.copy(notificationsEnabled = enabled)
             }
@@ -108,6 +114,12 @@ class InquiViewModel(
     fun saveUserName(name: String) {
         viewModelScope.launch {
             userPrefs.saveUserName(name)
+        }
+    }
+
+    fun saveTutorialCompleted(completed: Boolean) {
+        viewModelScope.launch {
+            userPrefs.saveTutorialCompleted(completed)
         }
     }
     
@@ -503,7 +515,10 @@ class InquiViewModel(
             annualMedals = medalsYear
         )
 
-        appContext?.let { TioroWidgetProvider.updateAllWidgets(it) }
+        appContext?.let { 
+            TioroWidgetProvider.updateAllWidgets(it) 
+            TioroStreakWidgetProvider.updateAllWidgets(it)
+        }
     }
 
     fun addActivity(name: String, isEffort: Boolean, context: android.content.Context) {

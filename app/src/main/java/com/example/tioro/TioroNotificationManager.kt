@@ -1,5 +1,6 @@
 package com.example.tioro
 
+import io.github.mortadelaco.tioro.R
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -16,8 +17,8 @@ object TioroNotificationManager {
     
     fun createNotificationChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Recordatorios de Tioro"
-            val descriptionText = "Notificaciones para recordarte que registres tus actividades"
+            val name = context.getString(R.string.notif_channel_name)
+            val descriptionText = context.getString(R.string.notif_channel_desc)
             val importance = NotificationManager.IMPORTANCE_HIGH
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = descriptionText
@@ -78,6 +79,21 @@ object TioroNotificationManager {
         }
         return target.timeInMillis - now.timeInMillis
     }
+
+    private fun getDelayToNextTuesday16h(): Long {
+        val now = Calendar.getInstance()
+        val target = Calendar.getInstance().apply {
+            set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY)
+            set(Calendar.HOUR_OF_DAY, 16)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+        }
+        
+        if (target.before(now)) {
+            target.add(Calendar.WEEK_OF_YEAR, 1)
+        }
+        return target.timeInMillis - now.timeInMillis
+    }
     
     fun scheduleAllDailyReminders(context: Context) {
         val workManager = WorkManager.getInstance(context)
@@ -113,6 +129,16 @@ object TioroNotificationManager {
             .addTag("DOMINGO_1800")
             .build()
         workManager.enqueueUniqueWork("DOMINGO_1800", ExistingWorkPolicy.KEEP, sundayRequest)
+
+        // Modo Descubrimiento de Widgets (Martes 16:00)
+        val delayTuesday = getDelayToNextTuesday16h()
+        val tuesdayData = workDataOf("MODE" to "WIDGET_DISCOVERY")
+        val tuesdayRequest = OneTimeWorkRequestBuilder<com.example.tioro.TioroNotificationWorker>()
+            .setInitialDelay(delayTuesday, TimeUnit.MILLISECONDS)
+            .setInputData(tuesdayData)
+            .addTag("WIDGET_DISCOVERY_1600")
+            .build()
+        workManager.enqueueUniqueWork("WIDGET_DISCOVERY_1600", ExistingWorkPolicy.KEEP, tuesdayRequest)
     }
     
     fun scheduleFollowUpReminder(context: Context) {
